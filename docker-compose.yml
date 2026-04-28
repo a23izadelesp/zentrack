@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: zentrack-backend
+    ports:
+      - "22897:22897"
+    volumes:
+      - zentrack_data:/app/data
+    environment:
+      - PORT=22897
+      - NODE_ENV=production
+      - DB_PATH=/app/data/zentrack.db
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./nuxt
+      dockerfile: Dockerfile
+    container_name: zentrack-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      - NODE_ENV=production
+      # Permite conectar el frontend con el backend desde el cliente.
+      # Cambiar por dominio si se despliega (ej. http://zentrack.daw.inspedralbes.cat:22897)
+      - NUXT_PUBLIC_API_BASE=http://localhost:22897
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  zentrack_data:
