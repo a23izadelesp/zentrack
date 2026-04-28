@@ -1,8 +1,8 @@
 import { ref } from 'vue'
 
-const API_URL = 'http://zentrack.daw.inspedralbes.cat:22897/api'
-
 export const useCloudSync = () => {
+  const config = useRuntimeConfig()
+  const API_URL = (config.public.apiBase || 'http://localhost:22897') + '/api'
   const token = ref(import.meta.client ? localStorage.getItem('zentrack_token') || '' : '')
   const userEmail = ref(import.meta.client ? localStorage.getItem('zentrack_email') || '' : '')
   const isSyncing = ref(false)

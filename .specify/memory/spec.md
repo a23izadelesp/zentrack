@@ -79,7 +79,8 @@ Como usuario, quiero poder crear una cuenta y sincronizar mi diario con un servi
 - **FR-002**: El sistema DEBE usar el módulo **@vite-pwa/nuxt** para gestionar el ciclo de vida del Service Worker.
 - **FR-003**: El chatbot DEBE procesar las peticiones mediante una **Server Route** de Nuxt Nitro (`/server/api/chat.post.ts`).
 - **FR-004**: La interfaz DEBE ser totalmente responsiva y usar una paleta de colores basada en **Tailwind CSS** (tonos pasteles/relajantes).
-- **FR-005**: El sistema DEBE monitorizar el estado `navigator.onLine` para activar/desactivar funciones que dependan de la nube.
+- FR-005: El sistema DEBE monitorizar el estado `navigator.onLine` para activar/desactivar funciones que dependan de la nube.
+- FR-006: El frontend y el backend DEBEN estar contenedorizados usando Docker y orquestados via `docker-compose.yml`.
 
 ### Key Entities
 

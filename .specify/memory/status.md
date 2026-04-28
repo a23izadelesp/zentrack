@@ -23,26 +23,27 @@ ZenTrack es una PWA Offline-First de bienestar emocional construida con Nuxt 4, 
 | 11 | Polish & Performance (Skeleton Loaders, Audit Fix) | ✅ |
 | 12 | **Node Express Backend** (SQLite, JWT Auth, Bcrypt) | ✅ |
 | 13 | **Frontend Cloud Integration** (Login, Push/Pull explícito) | ✅ |
+| 14 | **Configuración Docker** (Dockerfiles, docker-compose) | ✅ |
 
 ## Arquitectura Actual
 
 ```text
 ┌─────────────────────────────────────────┐
 │              FRONTEND (Nuxt 4)          │
-│  Puerto local: 3000                     │
-│  Deploy: Static (npm run generate)      │
+│  Contenedor: zentrack-frontend          │
+│  Deploy: Docker (puerto 3000)           │
 │  Hosting: zentrack.daw.inspedralbes.cat │
 │                                         │
 │  IndexedDB (Dexie) ← Datos del usuario  │
 │  Pinia ← Configuración persistente      │
 │  Service Worker ← Cache offline         │
 └────────────────┬────────────────────────┘
-                 │ HTTP (fetch)
+                 │ HTTP (fetch) a través de Nginx/Red
                  ▼
 ┌─────────────────────────────────────────┐
 │           BACKEND (Node/Express)        │
-│  Puerto: 22897                          │
-│  Hosting: mismo VPS (screen)            │
+│  Contenedor: zentrack-backend           │
+│  Deploy: Docker (puerto 22897)          │
 │                                         │
 │  SQLite ← users, sync_data             │
 │  JWT ← Autenticación                   │
